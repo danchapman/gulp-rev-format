@@ -36,7 +36,7 @@ module.exports = function (opts) {
     }
 
     // Decorate hash
-    var hash = decorateHash(hashReplace.prefix || file.revHash, opts.prefix, opts.suffix)
+    var hash = decorateHash(opts.hashReplace || file.revHash, opts.prefix, opts.suffix)
 
     // Write the new file path
     file.path = modifyFilename(file.revOrigPath, function (filename, extension) {
