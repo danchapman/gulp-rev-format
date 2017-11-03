@@ -7,6 +7,7 @@ var through = require('through2')
 var defaults = {
   prefix: '-',
   suffix: '',
+  hashReplace: '',
   lastExt: false
 }
 
@@ -18,7 +19,8 @@ module.exports = function (opts) {
   opts = objectAssign({
     prefix: defaults.prefix,
     suffix: defaults.suffix,
-    lastExt: defaults.lastExt
+    lastExt: defaults.lastExt,
+    hashReplace: defaults.hash
   }, opts)
 
   return through.obj(function (file, enc, cb) {
@@ -34,7 +36,7 @@ module.exports = function (opts) {
     }
 
     // Decorate hash
-    var hash = decorateHash(file.revHash, opts.prefix, opts.suffix)
+    var hash = decorateHash(hashReplace.prefix || file.revHash, opts.prefix, opts.suffix)
 
     // Write the new file path
     file.path = modifyFilename(file.revOrigPath, function (filename, extension) {
